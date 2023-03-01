@@ -2,7 +2,7 @@ from domain import Graph
 from utils import (
     read_file, write_file, read_from_activities_file,
     backwards_breadth_first_search, ford_algorithm,
-    dag, compute_times
+    dag, compute_times, get_minimum_cost_hamiltonian
 )
 
 
@@ -30,7 +30,8 @@ class Menu:
                                "Print list of inbound neighbours of a vertex",
                                "Find the lowest length path between two vertices using BFS backwards",
                                "Find the lowest cost walk between two vertices using Ford's algorithm",
-                               "Read from an activities file", "Perform a topological sort", "Show activities"]
+                               "Read from an activities file", "Perform a topological sort", "Show activities",
+                               "Find a minimum cost Hamiltonian cycle"]
 
     def empty_graph(self) -> None:
         """
@@ -371,6 +372,8 @@ class Menu:
             self.print_topological_sort_result()
         elif option == 26:
             self.show_activities()
+        elif option == 27:
+            self.hamiltonian_cycle()
         else:
             print("ERROR: Invalid menu option!")
 
@@ -504,6 +507,19 @@ class Menu:
             print(activity, end=" ")
 
         print()
+
+    def hamiltonian_cycle(self) -> None:
+        """
+        Finds the minimum cost Hamiltonian cycle in the graph.
+        """
+        cycle = list()
+        minimum_cost = get_minimum_cost_hamiltonian(self.__graph, 0, cycle)
+
+        result = f"INFO: The minimum cost Hamiltonian cycle with cost {minimum_cost} is: "
+        for vertex in cycle:
+            result += str(vertex) + " > "
+
+        print(result[:-3])
 
     @staticmethod
     def get_input(prompt: str) -> int:

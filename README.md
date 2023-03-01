@@ -52,3 +52,6 @@ Write a program that, given a list of activities with duration and list of prere
 - verify if the corresponding graph is a DAG and performs a topological sorting of the activities using the algorithm based on depth-first traversal (Tarjan's algorithm);
 - prints the earliest and the latest starting time for each activity and the total time of the project.
 - prints the critical activities. 
+
+### 5.6
+Given a digraph with costs, find a minimum cost Hamiltonian cycle (i.e., solve the TSP)
